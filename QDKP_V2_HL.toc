@@ -1,0 +1,8 @@
+## Interface: 60000
+## Title: Quick DKP V2 - Höllenlegion Plugin
+## Author: Hoochie @ EU-Dethecus
+## Version: 0.1
+## Dependencies: QDKP_V2, QDKP2_Config
+## SavedVariables: QDKP2_HL_PLUGIN
+
+QDKP_V2_HL.lua
