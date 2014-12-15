@@ -98,7 +98,7 @@ local function HoursTick()
 			elseif QDKP2_IsMainAlreadyProcessed(name) then
 				--gogo next one
 			elseif not QDKP2_AltsStillToCome(name, nameBase, i) then
-				local noreason;
+				local reasonNo;
 				
 				if not (online or QDKP2_GIVEOFFLINE) then
 					reasonNo = QDKP2LOG_NODKP_OFFLINE;
@@ -107,7 +107,7 @@ local function HoursTick()
 				end;
 				
 				if reasonNo then
-					QDKP2log_Entry(name, nil, QDKP2_LOC_HLBONUS..": "..QDKP2LOG_NODKP,  {nil, nil, toAdd},nil,QDKP2log_PacketFlags(nil,nil,nil,nil,reasonNo));
+					QDKP2log_Entry(name, nil, QDKP2LOG_NODKP,  {nil, nil, toAdd},nil,QDKP2log_PacketFlags(nil,nil,nil,nil,reasonNo));
 				end;
 			end;
 		end;
@@ -173,17 +173,19 @@ function QDKP2_OpenCopyWindow(...)
 	
 	local txt = QDKP2_CopyWindow_Data:GetText();
 	
-	local script = [[<script src="sorttable.js"></script>]];
-	txt = script .. '\n' .. txt;
-	
-	local table = '<TABLE ';
-	local tag = 'class="sortable" ';
-	txt = gsub(txt, table, table .. tag);
-	
-	QDKP2_CopyWindow_TextBuff = txt;
-	QDKP2_CopyWindow_Data:SetText(txt);
-	QDKP2_CopyWindow_Data:HighlightText();
-	QDKP2_CopyWindow_Data:SetFocus();
+	if strfind(txt, " HREF=") then
+		local script = [[<meta http-equiv="content-type" content="text/html; charset=UTF-8"> <script src="sorttable.js"></script>]];
+		txt = script .. '\n' .. txt;
+		
+		local table = '<TABLE ';
+		local tag = 'class="sortable" ';
+		txt = gsub(txt, table, table .. tag);
+		
+		QDKP2_CopyWindow_TextBuff = txt;
+		QDKP2_CopyWindow_Data:SetText(txt);
+		QDKP2_CopyWindow_Data:HighlightText();
+		QDKP2_CopyWindow_Data:SetFocus();
+	end;
 end;
 
 -------
@@ -195,60 +197,3 @@ end;
 QDKP2_Data["Dethecus-Höllenlegion"].AutoBossEarn = false;
 QDKP2_Data["Dethecus-Höllenlegion"].GUI.DKP_Timer = 20;
 QDKP2_Data["Dethecus-Höllenlegion"].GUI.ShowOutGuild = true;
-
---QDKP2_Config.lua [GLOBAL]
-QDKP2_Config_DB.profiles["Dethecus-Höllenlegion"] = {
-	["BM_AllowMultiple"] = false,
-	["AW_TIM_ExternalCtl"] = false,
-	["AW_HLTIMED_Period"] = 12,
-	["MISC_UploadOn_Tick"] = true,
-	["LOOT_OpenToolbox"] = true,
-	["AW_BA_RankCtl"] = true,
-	["BM_Keywords"] = "^1^T^N1^T^Skeywords^Sbid~`$n^t^N2^T^Svalue^S$net/2^Skeywords^Sbid~`half^t^N3^T^Svalue^S$net^Skeywords^Sbid~`max,~`bid~`all^t^N4^T^Svalue^S$minbid^Skeywords^Sbid~`min^t^t^^",
-	["LOG_MaxPlayer"] = 100,
-	["BM_MinBid"] = 20,
-	["BM_AnnounceWinnerChannel"] = "RAID",
-	["AW_TIM_RankCtl"] = "25%",
-	["AW_HL_TIMED_Period"] = 12,
-	["MISC_MinNetDKP"] = 0,
-	["AW_TIM_StandbyCtl"] = true,
-	["AW_BA_ExternalCtl"] = false,
-	["BM_AnnounceCancelChannel"] = "RAID",
-	["BM_ConfirmWinner"] = false,
-	["BM_CountdownLen"] = 5,
-	["BM_AnnounceWinnerText"] = "$NAME hat $ITEM gewonnen.",
-	["AW_HL_TIMED_RaidLogTicks"] = true,
-	["MISC_MinLevel"] = 90,
-	["LOOT_LogBadge"] = true,
-	["MISC_Inf_IsNeg"] = true,
-	["BM_GetGroup"] = false,
-	["BM_AutoRoll"] = false,
-	["BM_AckRejectChannel"] = "WHISPER",
-	["BM_AllowLesser"] = true,
-	["AW_SpecialRanks"] = {
-		"Trial", -- [1]
-	},
-	["AW_TIM_Period"] = 6,
-	["AW_TIM_ZoneCtl"] = "50%",
-	["BM_AnnounceStartText"] = "Bitte fuer $ITEM bieten! Gebot an mich whispern, in der Form \"/w ".. UnitName("player") .." bid 20\".",
-	["BM_AnnounceWinnerDKPText"] = "$NAME hat $ITEM mit $AMOUNT DKP gewonnen.",
-	["MISC_Inf_NewMember"] = true,
-	["FOR_CompactNote"] = true,
-	["AW_HL_TIMED_ShowAward"] = true,
-	["MISC_UploadOn_Modif"] = true,
-	["AW_HLTIMED_StandbyCtl"] = true,
-	["AW_HLTIMED_ZoneCtl"] = "40%",
-	["BRC_OverrideBroadcast"] = true,
-	["AW_HLTIMED_AltCtl"] = "40%",
-	["BM_HideWhisp"] = true,
-	["LOG_MaxRaid"] = 200,
-	["MISC_HidRanks"] = {
-		nil, -- [1]
-		nil, -- [2]
-		"Twink", -- [3]
-		"Nicht Aktive", -- [4]
-		"Legionnaire", -- [5]
-		"Faules Pack", -- [6]
-		"Ehren Mitglied", -- [7]
-	},
-};

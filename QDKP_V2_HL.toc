@@ -3,6 +3,6 @@
 ## Author: Hoochie @ EU-Dethecus
 ## Version: 0.1
 ## Dependencies: QDKP_V2, QDKP2_Config
-## SavedVariables: QDKP2_HL_PLUGIN
 
+Options.lua
 QDKP_V2_HL.lua
