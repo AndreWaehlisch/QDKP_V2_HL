@@ -192,8 +192,11 @@ end;
 --Inject Höllenlegion Default Setup
 -------
 
---QDKP_V2.lua [GLOBAL]
-
+--\World of Warcraft\WTF\Account\<AccountName>\SavedVariables\QDKP_V2.lua [GLOBAL]
 QDKP2_Data["Dethecus-Höllenlegion"].AutoBossEarn = false;
 QDKP2_Data["Dethecus-Höllenlegion"].GUI.DKP_Timer = 20;
 QDKP2_Data["Dethecus-Höllenlegion"].GUI.ShowOutGuild = true;
+
+--\World of Warcraft\WTF\Account\<AccountName>\SavedVariables\QDKP2_Config.lua [GLOBAL] - this gets saved into QDKP2_HLPLUGIN_TIME_UNTIL_UPLOAD
+QDKP2_Config_DB.profiles["Dethecus-Höllenlegion"].AW_HLTIMED_Period = 12;
+QDKP2_Config_DB.profiles["Dethecus-Höllenlegion"].BRC_OverrideBroadcast = true;
